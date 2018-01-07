@@ -1,0 +1,128 @@
+<!--{template common/header}-->
+
+<!--{if ($oper=='child')}-->
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    li {
+        line-height: 30px;
+    }
+
+    table a {
+        color: #4d89cd;
+    }
+
+    ul, ol {
+        padding: 0;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
+</style>
+<!--{/if}-->
+<style>
+    td a {
+        color: #4d89cd;
+    }
+</style>
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_manage_list_front">机构名录</a>
+    </div>
+</div>
+
+
+<style id="diy_style" type="text/css"></style>
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <!--don't close the div here-->
+        <ul class="tb cl">
+            <li <!--{if ($oper=='view')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_manage_form&oper=view&code={$company_data['code']}">基本资料</a></li>
+            <li <!--{if ($oper=='child')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_manage_form&oper=child&code={$company_data['code']}">相关机构</a></li>
+            <li><a href="plugin.php?id=company_manage:company_manage_form&oper=view">相关项目</a></li>
+            <li><a href="home.php?mod=spacecp&amp;ac=profile&amp;op=edu">相关用户</a></li>
+        </ul>
+        <!--{if ($oper=='view')}-->
+        <table cellspacing="0" cellpadding="0" class="tfm" id="profilelist">
+            <tr>
+                <th>机构简称</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['shorter_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>机构全称</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['full_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>所属公司</th>
+                <td><!--{if !empty($p_list_str)}-->{$p_list_str}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>所属分类</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['cate_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>地区</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['area_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>负责人</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['boss']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>电话</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['tel']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>详细地址</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['address']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>更新时间</th>
+                <td><!--{if !empty($company_data)}-->{$company_data['update_time']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th></th>
+                <td></td>
+            </tr>
+        </table>
+        <!--{elseif ($oper=='child')}-->
+        <table id="company_list"></table>
+        <!--{/if}-->
+
+    </div>
+
+
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+
+<script src="./source/plugin/company_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/f_content_common.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/common_extra.js"></script>
+<!--{if ($oper=='view')}-->
+<script src="./source/plugin/company_manage_admin/template/js/f_content.js"></script>
+<!--{elseif ($oper=='child')}-->
+<script src="./source/plugin/company_manage_admin/template/js/f_content_child.js"></script>
+<!--{else}-->
+<script src="./source/plugin/company_manage_admin/template/js/f_list.js"></script>
+<!--{/if}-->
+
+<!--{subtemplate common/footer}-->

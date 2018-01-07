@@ -1,0 +1,58 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    #residedistrictbox, #showerror_residecity {
+        display: inline;
+    }
+
+    table a {
+        color: #4d89cd;
+    }
+</style>
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_resource_list_front">资源库</a>
+    </div>
+    <div style="display:inline-block;float:right">
+        <a target="_blank" href="plugin.php?id=company_manage:company_human_form" style="float:right">我的资源</a>
+    </div>
+</div>
+
+<style id="diy_style" type="text/css"></style>
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <form id="search_form">
+            <input type="hidden" name="b_id">
+            <span>地区</span>
+            {$diqu}
+            <input class="btn btn-primary search_button" type="button" value="筛选">
+        </form>
+        <table class="table-responsive" id="human_list"></table>
+
+
+    </div>
+
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/ziyuan_side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+
+<script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/common_extra.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_r_list.js"></script>
+
+<!--{subtemplate common/footer}-->

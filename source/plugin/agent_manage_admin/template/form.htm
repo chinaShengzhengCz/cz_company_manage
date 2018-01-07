@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./source/plugin/agent_manage_admin/template/css/initial_style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/agent_manage_admin/template/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/agent_manage_admin/template/dict/select2/select2.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/agent_manage_admin/template/css/agent_manage_common.css" type="text/css" media="all">
+    <style>
+        input, textarea, .uneditable-input,select {
+            width: 50%
+        }
+        a {
+            color: #4d89cd;
+        }
+    </style>
+</head>
+<body>
+<form id="add_form" method="post" autocomplete="off" action="plugin.php?id=agent_manage_admin:add_agent_page">
+    <div>
+        <label>合伙人名称</label><input class="form-control" type="text" name="co_name" value="<!--{if !empty($agent_data)}-->{$agent_data['full_name']}<!--{/if}-->" required/>
+    </div>
+    <div>
+        <label>等级</label><input class="form-control" type="number" name="co_level" value="<!--{if !empty($agent_data)}-->{$agent_data['co_level']}<!--{/if}-->" required/>
+    </div>
+    <div>
+        <label>保证金</label><input class="form-control" type="number" name="ensure_money" value="<!--{if !empty($agent_data)}-->{$agent_data['ensure_money']}<!--{else}-->0<!--{/if}-->"/>
+    </div>
+    <div>
+        <label>手机号</label><input class="form-control" type="text" name="tel" required value="<!--{if !empty($agent_data)}-->{$agent_data['tel']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>微信名</label><input class="form-control" type="text" name="wechat" value="<!--{if !empty($agent_data)}-->{$agent_data['wechat']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>公司名</label><input class="form-control" type="text" name="company_name" value="<!--{if !empty($agent_data)}-->{$agent_data['company_name']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>用户id</label><input class="form-control" type="text" name="uid" required value="<!--{if !empty($agent_data)}-->{$agent_data['uid']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>邀请人uid</label><input class="form-control" type="text" name="up_uid" required value="<!--{if !empty($agent_data)}-->{$agent_data['up_uid']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <input type="hidden" name="oper" value="<!--{if !empty($agent_data)}-->edit<!--{else}-->add<!--{/if}-->"/>
+    <input type="hidden" name="" value="<!--{if !empty($agent_data)}-->$agent_data['']<!--{/if}-->"/>
+    <input type="submit" value="提交"/>
+</form>
+<script src="./source/plugin/agent_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="./source/plugin/agent_manage_admin/template/js/form.js"></script>
+
+</body>
+</html>

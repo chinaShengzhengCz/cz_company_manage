@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/initial_style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/company_manage_common.css" type="text/css" media="all">
+    <style>
+        input, textarea, .uneditable-input,select {
+            width: 50%
+        }
+    </style>
+</head>
+<body>
+<form id="add_form" method="post" autocomplete="off" action="plugin.php?id=company_manage_admin:add_company_category">
+    <div>
+        <label>分类名称</label><input class="form-control" type="text" name="name" value="<!--{if !empty($cate_data)}-->{$cate_data['name']}<!--{/if}-->" required/>
+    </div>
+    <div>
+        <label>上级分类</label>
+        <select name="parent_id" data-level="1">
+        <option value="0">一级分类</option>
+        <!--{if !empty($first_cates)}-->
+            <!--{loop $first_cates $cate}-->
+            <option value="{$cate['cate_id']}" <!--{if !empty($cate_data)&&$cate_data['parent_id']==$cate['cate_id']}-->selected<!--{/if}-->>{$cate['name']}</option>
+            <!--{/loop}-->
+        <!--{/if}-->
+        </select>
+    </div>
+    <div>
+        <label>排序</label><input class="form-control" type="number" name="position" value="<!--{if !empty($cate_data)}-->{$cate_data['position']}<!--{else}-->0<!--{/if}-->"/>
+    </div>
+    <input type="hidden" name="oper" value="<!--{if !empty($cate_data)}-->edit<!--{else}-->add<!--{/if}-->"/>
+    <input type="hidden" name="cate_id" value="<!--{if !empty($cate_data)}-->$cate_data['cate_id']<!--{/if}-->"/>
+    <input type="submit" value="提交"/>
+</form>
+
+<script src="./source/plugin/company_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/cate_form.js"></script>
+<!--{if !empty($cates)}-->
+<script>
+    jQuery(function(){
+        <!--{loop $cates $key $val}-->
+        setTimeout("cate_change({$key}+1,{$val['cate_id']})", 500*{$key});
+        <!--{/loop}-->
+    })
+</script>
+<!--{/if}-->
+</body>
+</html>

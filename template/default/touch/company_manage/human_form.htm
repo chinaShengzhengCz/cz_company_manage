@@ -1,0 +1,137 @@
+<!--{template common/header}-->
+
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/initial_style.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/select2/select2.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
+<style>
+    input, textarea, .uneditable-input,select {
+        width: 50%
+    }
+    a {
+        color: #4d89cd;
+    }
+</style>
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_resource_list_front">资源库</a>
+    </div>
+</div>
+
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <form id="add_form" method="post" autocomplete="off" action="plugin.php?id=company_manage:add_human">
+            <div>
+                <label>姓名</label><input class="form-control" type="text" name="name" value="<!--{if !empty($human_data)}-->{$human_data['name']}<!--{/if}-->" required/>
+            </div>
+            <div>
+                <label>微信</label><input class="form-control" type="text" name="wechat" value="<!--{if !empty($human_data)}-->{$human_data['wechat']}<!--{/if}-->"/>
+            </div>
+            <div>
+                <label>qq</label><input class="form-control" type="text" name="qq" value="<!--{if !empty($human_data)}-->{$human_data['qq']}<!--{else}-->0<!--{/if}-->"/>
+            </div>
+            <div>
+                <label>手机</label><input class="form-control" type="text" name="tel" value="<!--{if !empty($human_data)}-->{$human_data['tel']}<!--{else}--><!--{/if}-->"/>
+            </div>
+            <div>
+                <label>固定电话</label><input class="form-control" type="text" name="tel" value="<!--{if !empty($human_data)}-->{$human_data['tel']}<!--{else}--><!--{/if}-->"/>
+            </div>
+            <div>
+                <label>部门</label><input class="form-control" type="text" name="apartment" value="<!--{if !empty($human_data)}-->{$human_data['apartment']}<!--{else}--><!--{/if}-->"/>
+            </div>
+            <div>
+                <label>职位</label><input class="form-control" type="text" name="career" value="<!--{if !empty($human_data)}-->{$human_data['career']}<!--{else}--><!--{/if}-->"/>
+            </div>
+            <div>
+                <label>负责人</label><input class="form-control" type="text" name="boss" value="<!--{if !empty($human_data)}-->{$human_data['boss']}<!--{else}--><!--{/if}-->"/>
+            </div>
+            <div>
+                <label>地区</label>
+                {$diqu}
+            </div>
+            <div>
+                <label>可见</label>
+                <select class="form_control" name="visible_field" multiple>
+                    <option val="1">微信</option>
+                    <option val="2">qq</option>
+                    <option val="3">手机</option>
+                    <option val="4">固定电话</option>
+                </select>
+            </div>
+            <div>
+                <label>简介</label>
+                <textarea class="form-control" name="intra"><!--{if !empty($human_data)}-->{$human_data['intra']}<!--{else}--><!--{/if}--></textarea>
+            </div>
+            <div>
+                <label>业务(输入名称查询)</label>
+                <!--{if !empty($human_data)}-->
+                <input type="hidden" readonly value="{$human_data['b_id']}" class="form-control"  name="b_id[]" />
+                <select class="form-control select2" multiple name="b_id[]">
+                    <!--{if !empty($p_company)}-->
+                    <!--{loop $p_company $val}-->
+                    <option value="{$val['b_id']}" selected>{$val['type_name']}</option>
+                    <!--{/loop}-->
+
+                    <!--{/if}-->
+                </select>
+                <!--{else}-->
+                <select class="form-control select2" name="b_id[]" multiple></select>
+                <!--{/if}-->
+            </div>
+            <input type="hidden" name="oper" value="<!--{if !empty($human_data)}-->edit<!--{else}-->add<!--{/if}-->"/>
+            <input type="hidden" name="company_id" value="<!--{if !empty($human_data)}-->$human_data['hid']<!--{/if}-->"/>
+            <input type="submit" value="提交"/>
+        </form>
+    </div>
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/ziyuan_side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+
+
+<!--{if !empty($human_data)}-->
+<script>
+    var former_code="{$human_data['hid']}";
+</script>
+<!--{/if}-->
+<script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/select2/select2.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/select2/select2.zh_CN.js"></script>
+<script src="./source/plugin/company_manage/template/js/human_form.js"></script>
+<!--{if !empty($areas)}-->
+<script>
+
+    <!--{loop $areas $val}-->
+    <!--{if $val['level'] == 1}-->
+    type_in_district('resideprovince', "{$val['name']}");
+    <!--{elseif $val['level'] == 2}-->
+    setTimeout("type_in_district('residecity','{$val['name']}')", 1000);
+    <!--{elseif $val['level'] == 3}-->
+    setTimeout("type_in_district('residedist','{$val['name']}')", 2000);
+    <!--{elseif $val['level'] == 4}-->
+    setTimeout("type_in_district('residecommunity','{$val['name']}')", 3000);
+    <!--{/if}-->
+    <!--{/loop}-->
+</script>
+<!--{/if}-->
+<!--{if !empty($cates)}-->
+<script>
+    jQuery(function () {
+        <!--{loop $cates $key $val}-->
+        setTimeout("cate_change({$key}+1,{$val['b_id']})", 500 * {$key});
+        <!--{/loop}-->
+    })
+    <!--{if !empty($human_data['b_id'])}-->
+    setTimeout("cate_change({$key}+2,{$human_data['b_id']})", 500 * ({$key} + 1));
+    <!--{/if}-->
+</script>
+<!--{/if}-->
+
+<!--{subtemplate common/footer}-->

@@ -1,0 +1,60 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    #residedistrictbox, #showerror_residecity {
+        display: inline;
+    }
+
+    table a {
+        color: #4d89cd;
+    }
+</style>
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_manage_list_front">机构名录</a>
+    </div>
+    <div style="display:inline-block;float:right">
+        <span style="margin-left:20px">企业名称</span>
+        <input type="text" id="company_name">
+        <input class="btn btn-primary search_button" type="button" value="筛选">
+    </div>
+</div>
+
+<style id="diy_style" type="text/css"></style>
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <div class="table-responsive">
+            <form id="search_form">
+                <input class="btn btn-primary search_button" type="button"  value="搜索">
+            </form>
+
+        </div>
+        <table id="company_list"></table>
+
+
+    </div>
+
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/zhiya_side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+
+<script src="./source/plugin/company_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/common_extra.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/f_content_common.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/f_zhiya_list.js"></script>
+
+<!--{subtemplate common/footer}-->

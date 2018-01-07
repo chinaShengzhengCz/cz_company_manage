@@ -1,0 +1,145 @@
+<!--{template common/header}-->
+
+<!--{if ($oper=='child')||($oper=='holder')}-->
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    li {
+        line-height: 30px;
+    }
+
+    table a {
+        color: #4d89cd;
+    }
+
+    ul, ol {
+        padding: 0;
+        margin: 0;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
+</style>
+<!--{/if}-->
+<style>
+    td a {
+        color: #4d89cd;
+    }
+</style>
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_zhiya_list_front">质押库</a>
+    </div>
+</div>
+
+
+<style id="diy_style" type="text/css"></style>
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <!--don't close the div here-->
+        <ul class="tb cl">
+            <li <!--{if ($oper=='view')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id={$zhiya_data['id']}">基本资料</a></li>
+            <li <!--{if ($oper=='child')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=child&zhiya_id={$zhiya_data['id']}">相关质押</a></li>
+        </ul>
+        <!--{if ($oper=='view')}-->
+        <table cellspacing="0" cellpadding="0" class="tfm" id="profilelist">
+            <tr>
+                <th>证券代码</th>
+                <td><!--{if !empty($zhiya_data['stock_code'])}-->{$zhiya_data['stock_code']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>证券简称</th>
+                <td><!--{if !empty($zhiya_data['code_company'])}-->{$zhiya_data['code_company']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>股东名称</th>
+                <td><!--{if !empty($zhiya_data['holder_name'])}-->{$zhiya_data['holder_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押方</th>
+                <td><!--{if !empty($zhiya_data['zhiya_company_name'])}-->{$zhiya_data['zhiya_company_name']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押方类型</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['zhiya_type']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>是否质押回购</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['is_rebuy']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押股数(万股)</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['zhiya_count']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押股份类型</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['stock_type']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>参考价值(万元)</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['value']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押起始时间</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['start_date']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>质押截止日期</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['end_date']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>解押日期</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['dis_date']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>相关说明</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['remark']}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>所属行业</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['industry']}<!--{/if}--></td>
+            </tr>
+        </table>
+        <!--{elseif ($oper=='child')}-->
+        <table id="company_list"></table>
+
+        <!--{/if}-->
+
+    </div>
+
+
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/zhiya_side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+<script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_content_common.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/common_extra.js"></script>
+<!--{if ($oper=='view')}-->
+<script src="./source/plugin/company_manage/template/js/f_zhiya_detail.js"></script>
+<!--{elseif ($oper=='child')}-->
+<script src="./source/plugin/company_manage/template/js/f_related_zhiya.js"></script>
+
+<!--{else}-->
+<script src="./source/plugin/company_manage/template/js/f_list.js"></script>
+<!--{/if}-->
+
+<!--{subtemplate common/footer}-->

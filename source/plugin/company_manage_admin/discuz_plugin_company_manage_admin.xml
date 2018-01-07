@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Plugin]]></item>
+	<item id="Version"><![CDATA[X3]]></item>
+	<item id="Time"><![CDATA[2017-11-13 21:22]]></item>
+	<item id="From"><![CDATA[Discuz! Board (http://discuz.loc/)]]></item>
+	<item id="Data">
+		<item id="plugin">
+			<item id="available"><![CDATA[1]]></item>
+			<item id="adminid"><![CDATA[1]]></item>
+			<item id="name"><![CDATA[ÆóÒµÃûµ¥¹ÜÀí]]></item>
+			<item id="identifier"><![CDATA[company_manage_admin]]></item>
+			<item id="description"><![CDATA[]]></item>
+			<item id="datatables"><![CDATA[]]></item>
+			<item id="directory"><![CDATA[company_manage_admin/]]></item>
+			<item id="copyright"><![CDATA[]]></item>
+			<item id="version"><![CDATA[]]></item>
+			<item id="__modules">
+				<item id="0">
+					<item id="name"><![CDATA[company_manage_list]]></item>
+					<item id="menu"><![CDATA[ÁÐ±í]]></item>
+					<item id="url"><![CDATA[http://localhost/discuz/admin.php?frames=yes&amp;amp;amp;amp;amp;amp;amp;amp;amp;action=plugins&amp;amp;amp;amp;amp;amp;amp;amp;amp;identifier=company_manage&amp;amp;amp;amp;amp;amp;amp;amp;amp;pmod=company_manage_list]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[1]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="1">
+					<item id="name"><![CDATA[company_manage_form]]></item>
+					<item id="menu"><![CDATA[ÐÂÔö]]></item>
+					<item id="url"><![CDATA[admin.php?action=plugins&amp;amp;amp;amp;amp;amp;amp;operation=config&amp;amp;amp;amp;amp;amp;amp;do=19&amp;amp;amp;amp;amp;amp;amp;identifier=company_manage&amp;amp;amp;amp;amp;amp;amp;pmod=company_manage_form]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[2]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="2">
+					<item id="name"><![CDATA[company_manage_cate_form]]></item>
+					<item id="menu"><![CDATA[ÐÂÔö·ÖÀà]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[3]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="3">
+					<item id="name"><![CDATA[company_manage_cate_list]]></item>
+					<item id="menu"><![CDATA[·ÖÀàÁÐ±í]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[4]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="4">
+					<item id="name"><![CDATA[company_manage_biz_type_form]]></item>
+					<item id="menu"><![CDATA[ÐÂÔöÒµÎñÀàÐÍ]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[5]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+				<item id="5">
+					<item id="name"><![CDATA[company_manage_biz_type_list]]></item>
+					<item id="menu"><![CDATA[ÒµÎñÁÐ±íÀàÐÍ]]></item>
+					<item id="url"><![CDATA[]]></item>
+					<item id="type"><![CDATA[3]]></item>
+					<item id="adminid"><![CDATA[0]]></item>
+					<item id="displayorder"><![CDATA[6]]></item>
+					<item id="navtitle"><![CDATA[]]></item>
+					<item id="navicon"><![CDATA[]]></item>
+					<item id="navsubname"><![CDATA[]]></item>
+					<item id="navsuburl"><![CDATA[]]></item>
+				</item>
+			</item>
+		</item>
+		<item id="version"><![CDATA[X3]]></item>
+		<item id="installfile"><![CDATA[install.php]]></item>
+	</item>
+</root>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/initial_style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/company_manage_common.css" type="text/css" media="all">
+</head>
+<body>
+<form id="add_form" method="post" autocomplete="off" action="plugin.php?id=company_manage:add_company_tag">
+    <div>
+        <label>标签名称</label><input class="form-control" type="text" name="name" value="<!--{if !empty($tag_data)}-->{$tag_data['tag_name']}<!--{/if}-->" required/>
+    </div>
+    <input type="hidden" name="oper" value="<!--{if !empty($tag_data)}-->edit<!--{else}-->add<!--{/if}-->"/>
+    <input type="hidden" name="tag_id" value="<!--{if !empty($tag_data)}-->$tag_data['tag_id']<!--{/if}-->"/>
+    <input type="submit" value="提交"/>
+</form>
+
+<script src="./source/plugin/company_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/tag_form.js"></script>
+</body>
+</html>

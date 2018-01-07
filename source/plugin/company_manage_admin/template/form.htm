@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/initial_style.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/dict/select2/select2.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="./source/plugin/company_manage_admin/template/css/company_manage_common.css" type="text/css" media="all">
+    <style>
+        input, textarea, .uneditable-input,select {
+            width: 50%
+        }
+        a {
+            color: #4d89cd;
+        }
+    </style>
+</head>
+<body>
+<form id="add_form" method="post" autocomplete="off" action="plugin.php?id=company_manage:add_company_page">
+    <div>
+        <label>全称</label><input class="form-control" type="text" name="full_name" value="<!--{if !empty($company_data)}-->{$company_data['full_name']}<!--{/if}-->" required/>
+    </div>
+    <div>
+        <label>简称</label><input class="form-control" type="text" name="shorter_name" value="<!--{if !empty($company_data)}-->{$company_data['shorter_name']}<!--{/if}-->" required/>
+    </div>
+    <div>
+        <label>排序</label><input class="form-control" type="number" name="position" value="<!--{if !empty($company_data)}-->{$company_data['position']}<!--{else}-->0<!--{/if}-->"/>
+    </div>
+    <div>
+        <label>电话</label><input class="form-control" type="text" name="tel" value="<!--{if !empty($company_data)}-->{$company_data['tel']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>负责人</label><input class="form-control" type="text" name="boss" value="<!--{if !empty($company_data)}-->{$company_data['boss']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>地区</label>
+        {$diqu}
+    </div>
+    <div>
+        <label>详细地址</label><input class="form-control" type="text" name="address" value="<!--{if !empty($company_data)}-->{$company_data['address']}<!--{else}--><!--{/if}-->"/>
+    </div>
+    <div>
+        <label>上级分类</label>
+        <select name="cate_id" data-level="1" required>
+            <option value="">一级分类</option>
+            <!--{if !empty($first_cates)}-->
+            <!--{loop $first_cates $cate}-->
+            <option value="{$cate['cate_id']}" <!--{if !empty($company_data)&&$company_data['cate_id']==$cate['cate_id']}-->selected<!--{/if}-->>{$cate['name']}</option>
+            <!--{/loop}-->
+            <!--{/if}-->
+        </select>
+    </div>
+    <div>
+        <label>上级企业(输入名称或者编码查询)</label>
+        <!--{if !empty($p_company) && empty($p_data)}-->
+        <input type="text" readonly value="{$p_company['full_name']}" class="form-control"/>
+        <input type="hidden" readonly value="{$p_company['code']}" class="form-control"  name="parent_code[]"/>
+        <!--{else}-->
+        <!--{if !empty($p_data)}-->
+        <input type="hidden" readonly value="{$p_data['p_code']}" class="form-control"  name="parent_code[]" />
+        <select class="form-control select2" multiple name="parent_code[]">
+            <!--{if !empty($p_company)}-->
+                <!--{loop $p_company $val}-->
+            <option value="{$val['code']}" selected>{$val['shorter_name']}</option>
+                <!--{/loop}-->
+
+            <!--{/if}-->
+        </select>
+        <!--{else}-->
+        <select class="form-control select2" name="parent_code[]" multiple></select>
+        <!--{/if}-->
+        <!--{/if}-->
+    </div>
+    <input type="hidden" name="oper" value="<!--{if !empty($company_data)}-->edit<!--{else}-->add<!--{/if}-->"/>
+    <input type="hidden" name="company_id" value="<!--{if !empty($company_data)}-->$company_data['id']<!--{/if}-->"/>
+    <input type="submit" value="提交"/>
+</form>
+<!--{if !empty($company_data)}-->
+<script>
+    var former_code="{$company_data['code']}";
+</script>
+<!--{/if}-->
+<!--{if !empty($p_company)}-->
+<script>
+    var p_code="{$p_company['full_name']}";
+    p_datas = [];
+    <!--{loop $p_company $val}-->
+    p_datas.push({id:'{$val['code']}',text:'{$val['shorter_name']}'});
+    <!--{/loop}-->
+
+</script>
+<!--{/if}-->
+<script src="./source/plugin/company_manage_admin/template/dict/jquery/jquery.min.js"></script>
+<script src="static/js/common.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/select2/select2.min.js"></script>
+<script src="./source/plugin/company_manage_admin/template/dict/select2/select2.zh_CN.js"></script>
+<script src="./source/plugin/company_manage_admin/template/js/form.js"></script>
+<!--{if !empty($areas)}-->
+<script>
+
+    <!--{loop $areas $val}-->
+    <!--{if $val['level'] == 1}-->
+    type_in_district('resideprovince', "{$val['name']}");
+    <!--{elseif $val['level'] == 2}-->
+    setTimeout("type_in_district('residecity','{$val['name']}')", 1000);
+    <!--{elseif $val['level'] == 3}-->
+    setTimeout("type_in_district('residedist','{$val['name']}')", 2000);
+    <!--{elseif $val['level'] == 4}-->
+    setTimeout("type_in_district('residecommunity','{$val['name']}')", 3000);
+    <!--{/if}-->
+    <!--{/loop}-->
+</script>
+<!--{/if}-->
+<!--{if !empty($cates)}-->
+<script>
+    jQuery(function () {
+        <!--{loop $cates $key $val}-->
+        setTimeout("cate_change({$key}+1,{$val['cate_id']})", 500 * {$key});
+        <!--{/loop}-->
+    })
+    <!--{if !empty($company_data['cate_id'])}-->
+    setTimeout("cate_change({$key}+2,{$company_data['cate_id']})", 500 * ({$key} + 1));
+    <!--{/if}-->
+</script>
+<!--{/if}-->
+
+
+</body>
+</html>
