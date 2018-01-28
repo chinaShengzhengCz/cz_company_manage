@@ -3,6 +3,7 @@ $forbid_config = array(
     4,5,6,7// group_id   禁止group_id访问插件
 );
 $page_config = array(
+	1 => 50,// group_id => 页面数据
 	4 => 500,// group_id => 页面数据
 	5 => 500,
 	6 => 500,

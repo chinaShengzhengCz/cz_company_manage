@@ -46,7 +46,7 @@
     <div class="mn">
         <!--don't close the div here-->
         <ul class="tb cl">
-            <li <!--{if ($oper=='view')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id={$zhiya_data['id']}">基本资料</a></li>
+            <li <!--{if ($oper=='view')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id={$zhiya_data['id']}">本次质押</a></li>
             <li <!--{if ($oper=='child')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=child&zhiya_id={$zhiya_data['id']}">相关质押</a></li>
         </ul>
         <!--{if ($oper=='view')}-->
@@ -84,8 +84,16 @@
                 <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['stock_type']}<!--{/if}--></td>
             </tr>
             <tr>
+                <th>质押日参考市值(万元)</th>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['stock_value']}<!--{/if}--></td>
+            </tr>
+            <tr>
                 <th>参考价值(万元)</th>
-                <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['value']}<!--{/if}--></td>
+                <td><!--{if !empty($zhiya_data)}-->{$zhiya_day_value}<!--{/if}--></td>
+            </tr>
+            <tr>
+                <th>差价</th>
+                <td><!--{if !empty($zhiya_data['gap'])}-->{$zhiya_data['gap']}%<!--{/if}--></td>
             </tr>
             <tr>
                 <th>质押起始时间</th>

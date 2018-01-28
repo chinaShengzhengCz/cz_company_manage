@@ -15,7 +15,7 @@ if (!empty($_GET['zhiya_id'])) {
         $tmp_company = C::t('company_manage_base')->fetch_by_where("code='{$zhiya_data['code']}'", 'shorter_name');
         if (!empty($tmp_company)) {
             $zhiya_data['code_company'] = $tmp_company['shorter_name'];
-        }else{
+        } else {
             $zhiya_data['code_company'] = $zhiya_data['code'];
         }
         $zhiya_company = C::t('company_manage_base')->fetch_by_where("code ='{$zhiya_data['zhiya_code']}'", 'shorter_name');
@@ -24,13 +24,18 @@ if (!empty($_GET['zhiya_id'])) {
         } else {
             $zhiya_data['zhiya_company_name'] = $zhiya_data['zhiya_code'];
         }
+        $stock_data = C::t('company_stock_price')->fetch_by_where("stock_code ='{$zhiya_data['stock_code']}'", 'price');
+        if ($stock_data) {
+            $stock_price = $stock_data['price'];
+            $zhiya_day_value = $stock_price * $zhiya_data['zhiya_count'];
+        }
         $holder = C::t('company_holder')->fetch_by_where("holder_id ='{$zhiya_data['holder_id']}'", 'holder_id,holder_name');
         if (!empty($holder)) {
             $zhiya_data['holder_name'] = $holder['holder_name'];
         } else {
             $zhiya_data['holder_name'] = $zhiya_data['holder_id'];
         }
-        $zhiya_data['is_rebuy'] = $zhiya_data['is_rebuy']=='True' ? '是' : '否';
+        $zhiya_data['is_rebuy'] = $zhiya_data['is_rebuy'] == 'True' ? '是' : '否';
         if ($_GET['oper'] == 'view') {
             $oper = $_GET['oper'];
 //            if($zhiya_data['zhiya_type'] == '个人'){
@@ -90,8 +95,8 @@ if (!empty($_GET['zhiya_id'])) {
                             $data = merge_arr($data, $zhiya_companys, 'zhiya_code');
                         }
                     }
-                    foreach($data as &$row){
-                        if(empty($row['zhiya_name'])){
+                    foreach ($data as &$row) {
+                        if (empty($row['zhiya_name'])) {
                             $row['zhiya_name'] = $row['zhiya_code'];
                         }
                     }

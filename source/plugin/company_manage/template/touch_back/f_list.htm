@@ -1,0 +1,119 @@
+<!--{template common/header}-->
+
+<link rel="stylesheet" href="./source/plugin/company_manage/template/touch/dict/bootstrap/css/bootstrap.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    #residedistrictbox, #showerror_residecity {
+        display: inline;
+    }
+
+    p select.ps {
+        width: 30% !important;
+    }
+
+    table a {
+        color: #4d89cd !important;
+    }
+
+    .collapse-submenu > a:after {
+        border: 4px solid transparent;
+        border-top-color: #B0B0B0;
+        display: block;
+        float: right;
+        width: 0;
+        height: 0;
+        margin-top: 5px;
+        margin-right: -10px;
+        content: " ";
+    }
+
+    .dropdown-menu > li > a > span {
+        padding: 5px 50% 5px 5px;
+    }
+
+    .collapse-submenu .collapse li {
+        padding: 3px 0px 3px 30px;
+        background-color: #e9e9e9;
+    }
+</style>
+
+
+<div class="btn-group">
+    <button class="btn btn-default" type="button">地区</button>
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" data-submenu>
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" style="width:100%;position:absolute;top:0;left:0;height:60%;z-index:99999">
+    <div style="width:50%;background-color:white;height:60%;">
+            {$diqu}
+            <li class="dropdown-submenu">
+                <a tabindex="0">Action</a>
+
+                <ul class="dropdown-menu">
+                    <li><a tabindex="0">Sub action</a></li>
+                    <li data-toggle="collapse" class="collapse-submenu" href="#collapse1">
+                        <a tabindex="0">Another sub action</a>
+
+                        <ul id="collapse1" class="collapse">
+                            <li><a tabindex="0">Sub action</a></li>
+                            <li><a tabindex="0">Another sub action</a></li>
+                            <li><a tabindex="0">Something else here</a></li>
+                        </ul>
+                    </li>
+                    <li><a tabindex="0">Something else here</a></li>
+                    <li class="disabled"><a tabindex="-1">Disabled action</a></li>
+                    <li class="dropdown-submenu">
+                        <a tabindex="0">Another action</a>
+
+                        <ul class="dropdown-menu">
+                            <li><a tabindex="0">Sub action</a></li>
+                            <li><a tabindex="0">Another sub action</a></li>
+                            <li><a tabindex="0">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a tabindex="0">Another action</a>
+
+                <ul class="dropdown-menu">
+                    <li><a tabindex="0">Sub action</a></li>
+                    <li><a tabindex="0">Another sub action</a></li>
+                    <li><a tabindex="0">Something else here</a></li>
+                </ul>
+            </li>
+            <li><a tabindex="0">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a tabindex="0">Separated link</a></li>
+    </div>
+    </ul>
+</div>
+
+
+<div id="pt" class="bm cl">
+    <input type="text" id="company_name" placeholder="企业名称">
+    <input class="btn btn-primary search_button" type="button" value="搜索">
+</div>
+<div>
+    <div class="table-responsive">
+        <form id="search_form">
+            <input type="hidden" name="cate_id">
+            <input class="btn btn-primary search_button" type="button" value="筛选">
+
+        </form>
+
+    </div>
+</div>
+<table id="company_list" data-mobile-responsive="true"></table>
+
+<script src="./source/plugin/company_manage/template/touch/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage/template/touch/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage/template/touch/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage/template/touch/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/f_table_common.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/f_content_common.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/f_list.js"></script>
+
+<!--{subtemplate common/footer}-->

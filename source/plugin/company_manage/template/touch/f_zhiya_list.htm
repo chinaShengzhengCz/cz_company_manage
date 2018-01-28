@@ -1,6 +1,5 @@
 <!--{template common/header}-->
 <link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
-<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
 <link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
 <link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
 <style>
@@ -8,79 +7,423 @@
         display: inline;
     }
 
+    ::-webkit-scrollbar {
+        display: none;
+    }
+
+    .p-110-top {
+        padding-top: 30px;
+    }
+
+    p select.ps {
+        width: 30% !important;
+    }
+
     table a {
-        color: #4d89cd;
+        color: #4d89cd !important;
+    }
+
+    .collapse-submenu > a:after {
+        border: 4px solid transparent;
+        border-top-color: #B0B0B0;
+        display: block;
+        float: right;
+        width: 0;
+        height: 0;
+        margin-top: 5px;
+        margin-right: -10px;
+        content: " ";
+    }
+
+    .dropdown-menu > li > a > span {
+        padding: 5px 50% 5px 5px;
+    }
+
+    .collapse-submenu .collapse li {
+        padding: 3px 0px 3px 30px;
+        background-color: #e9e9e9;
+    }
+
+    .confidition-zone {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 100;
+        padding: 0;
+    }
+
+    .fl {
+        float: left;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    .m-14-top {
+        margin-top: 14px;
+    }
+
+    .m-10-right {
+        margin-right: 10px;
+        float: right;
+    }
+
+    .address-condition {
+        position: relative;
+    }
+
+    .address-items {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 60%;
+        z-index: 99999;
+    }
+
+    .no-right-btn {
+        border-right: none;
+    }
+
+    html.fobidden-html, .fobidden-html body {
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .dropdown-zone, .dropdown-zone-area, .dropdown-zone-cate {
+        display: none;
+        position: fixed;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 100;
+        border-top: 1px solid #dddddd;
+        border-bottom: 1px solid #dddddd;
+        top: 28px;
+    }
+
+    .flex-display {
+        display: flex;
+    }
+
+    .flex-display ul {
+        height: 268px;
+        max-height: 320px;
+        overflow: auto;
+        border-right: 1px solid #dddddd;
+    }
+
+    .bg-shadow {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: fixed;
+        z-index: 10;
+        background: rgba(0, 0, 0, .5);
+        display: none;
+    }
+
+    .flex-display ul:last-child {
+        border-right: none;
+    }
+
+    .flex-display ul li {
+        line-height: 32px;
+        position: relative;
+    }
+
+    .flex-display ul li.hasChild:after {
+        width: 0;
+        height: 0;
+        content: '';
+        position: absolute;
+        right: 5px;
+        top: 11px;
+        border-top: 5px solid transparent;
+        border-left: 5px solid #DDDDDD;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+    }
+
+    .flex-display ul li a {
+        box-sizing: border-box;
+        display: block;
+        font-size: 12px;
+        line-height: 32px;
+        height: 32px;
+        width: 100%;
+        padding: 0 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-decoration: none;
+    }
+
+    .flex-display ul li a:active {
+        text-decoration: none;
+        background: #F2F2F2;
+    }
+
+    .flex-display ul li a:visited {
+        background: #f8f8f8;
+    }
+
+    .flex-1 {
+        flex: 1;
+    }
+
+    .flex-2 {
+        flex: 2;
+    }
+
+    .dropload-up, .dropload-down {
+        position: relative;
+        height: 0;
+        overflow: hidden;
+        font-size: 12px;
+        /* 开启硬件加速 */
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+
+    .f-14 {
+        font-size: 14px;
+        display: block;
+    }
+
+    .dropload-down {
+        height: 50px;
+    }
+
+    .dropload-refresh, .dropload-update, .dropload-load, .dropload-noData {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
     }
 
     .inline, .inline label {
         display: inline;
     }
 
-    .hidden {
-        display: none;
+    .dropload-load .loading {
+        display: inline-block;
+        height: 15px;
+        width: 15px;
+        border-radius: 100%;
+        margin: 6px;
+        border: 2px solid #666;
+        border-bottom-color: transparent;
+        vertical-align: middle;
+        -webkit-animation: rotate 0.75s linear infinite;
+        animation: rotate 0.75s linear infinite;
+    }
+
+    @-webkit-keyframes rotate {
+        0% {
+            -webkit-transform: rotate(0deg);
+        }
+        50% {
+            -webkit-transform: rotate(180deg);
+        }
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes rotate {
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    thead, tbody {
+        width: 100%;
+    }
+
+    #body-main {
+        font-size: 14px;
+    }
+
+    .table-zone {
+        width: 100%;
+        font-size: 12px;
+        border-left: 1px solid #d2d2d2;
+        border-top: 1px solid #d2d2d2;
+    }
+
+    .table-zone th {
+        font-weight: bold;
+        height: 24px;
+    }
+
+    .table-zone th, .table-zone td {
+        padding: 0 3px;
+        border-right: 1px solid #d2d2d2;
+        border-bottom: 1px solid #d2d2d2;
+        line-height: 24px;
+    }
+
+    .table-zone td {
+        word-break: break-all;
+    }
+
+    .limit-width {
+        width: 75px;
+        word-break: break-all;
+        white-space: normal;
+    }
+
+    .btn-group > .btn:first-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .date {
+        width: 80%;
+        margin: 5%;
+    }
+
+    input {
+        width: 55%;
+    }
+
+    .top_botton {
+        margin-right: 5%;
+        width: 43%
+    }
+
+    .input_row {
+        margin: 3%;
+    }
+
+    .top_botton a {
+        width: 100%;
     }
 </style>
 
-<div id="pt" class="bm cl">
-    <div class="z">
-        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-        <a href="plugin.php?id=company_manage:company_zhiya_list_front">质押库</a>
+
+<div class="btn-group f-14 p-110-top">
+    <div class="bg-shadow" onclick="hideCondition()"></div>
+    <!--条件筛选层-->
+    <div class="confidition-zone">
+
+        <div class="address-condition">
+            <div class="btn-group top_botton">
+                <a class="btn js-drop" href="#" data-type="area" id="cateShow">
+                    预设条件
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-zone dropdown-zone-area">
+                    <div class="flex-display">
+                        <ul class="flex-1" id="OneArea">
+                            <li onclick="formatSearch('','');return false;" class=""><a href="#">全部</a></li>
+                            <li onclick="formatSearch('finish_alert',1);return false;" class=""><a href="javascript:void(0)">质押到期提醒</a></li>
+                            <li onclick="formatSearch('dis_recent','X');return false;" class=""><a href="javascript:void(0)">近期解押</a></li>
+                            <li onclick="formatSearch('zhiya_recent',1);return false;" class=""><a href="javascript:void(0)">30天内短期质押</a></li>
+                            <li onclick="formatSearch('zhiya_recent',3);return false;" class=""><a href="javascript:void(0)">90天内短期质押</a></li>
+                            <li onclick="formatSearch('dis_recent',1);return false;" class=""><a href="javascript:void(0)">30天内解押</a></li>
+                            <li onclick="formatSearch('dis_recent',3);return false;" class=""><a href="javascript:void(0)">90天内解押</a></li>
+                            <li onclick="formatSearch('is_gap',1);return false;" class=""><a href="javascript:void(0)">差价查询</a></li>
+                        </ul>
+                        <ul class="flex-1" id="SecondArea"></ul>
+                        <ul class="flex-1" id="ThirdArea"></ul>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-group top_botton">
+                <a class="btn js-drop" href="#" data-type="cate">
+                    组合查询
+                    <span class="caret"></span>
+                </a>
+                <div class="dropdown-zone dropdown-zone-cate">
+                    <div class="flex-display">
+                        <ul class="flex-2" id="OneCate">
+                            <p class="input_row"><label class="inline">证券代码 <input class="form-control multi_search" name="stock_code"/></label></p>
+                            <p class="input_row"><label class="inline">股东名称 <input class="form-control multi_search" name="holder_name"/></label></p>
+                            <p><input type="text" name="start_date_s" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="质押日期开始时间"></p>
+                            <p><input type="text" name="end_date_s" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="到期日期开始时间"></p>
+                            <p><input type="text" name="dis_date_s" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="解押日期开始时间"></p>
+                        </ul>
+                        <ul class="flex-2" id="SecondCate">
+                            <p class="input_row"><label class="inline">股票名称 <input class="form-control multi_search" name="company_name"/></label></p>
+                            <p class="input_row"><label class="inline"><span style="width:60px;display:inline-block">质押方</span><input class="form-control" name="zhiya_name"/></label></p>
+                            <p><input type="text" name="start_date_e" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="质押日期结束时间"></p>
+                            <p><input type="text" name="end_date_e" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="到期日期结束时间"></p>
+                            <p><input type="text" name="dis_date_e" class="date laydate multi_search" autocomplete="off" tabindex="1" placeholder="解押日期结束时间"></p>
+                            <input class="btn btn-primary search_button m-10-right" onclick="getSearchData();return false;" type="button" value="搜索">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- end-->
+
+    <div id="body-main">
+        <table class="table-zone" cellpadding="0" cellspacing="0" width="100%">
+            <thead>
+            <th width="25%">股票名称</th>
+            <th width="30%">股东</th>
+            <th width="12%">开始日期</th>
+            <th width="12%">到期日期</th>
+            <th>解押日期</th>
+            </thead>
+            <tbody id="tbodyMain">
+
+            </tbody>
+        </table>
     </div>
 </div>
+<div style="display: none;" id="FormData">
+    <!--搜索栏数据-->
+    <input type="hidden" name="finish_alert" value="" class="single_search">
+    <input type="hidden" name="dis_recent" value="" class="single_search">
+    <input type="hidden" name="zhiya_recent" value="" class="single_search">
+    <input type="hidden" name="is_gap" value="" class="single_search">
+    <input name="order" value="asc"/>
+    <input name="fields" value="*"/>
+    <input name="limit" value="20"/>
+    <!--end-->
 
-<style id="diy_style" type="text/css"></style>
-<div id="ct" class="ct2_a wp cl">
-    <div class="mn">
-        <form class="hidden" id="search_form">
-            <input type="hidden" name="finish_alert" value="">
-            <input type="hidden" name="dis_recent" value="">
-            <input type="hidden" name="zhiya_recent" value="">
-            <p>
-                <label class="inline">证券代码 <input class="form-control" name="stock_code"/></label>
-                <label class="inline">公司名称 <input class="form-control" name="company_name"/></label>
-            </p>
-            <p>
-                <label class="inline">股东名称 <input class="form-control" name="holder_name"/></label>
-                <label class="inline"><span  style="width:60px;display:inline-block">质押方</span><input class="form-control" name="zhiya_name"/></label>
-            </p>
-            <p>
-                <label class="inline">质押日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
-            </p>
-            <p>
-                <label class="inline">到期日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
-            </p>
-            <p>
-                <label class="inline">解押日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
-            </p>
-            <input class="btn btn-primary search_button" type="button" value="查询">
-        </form>
-        <table id="company_list"></table>
-    </div>
+    <textarea style="display: none;" id="tmplTbody">
+		<%for(var i=0;i<rows.length;i++){%>
+			<tr>
 
-    <div class="appl">
-        <!--[diy=diysidetop]-->
-        <div id="diysidetop" class="area"></div><!--[/diy]-->
-        <!--{subtemplate company_manage/zhiya_side_left}-->
-        <!--[diy=diysidebottom]-->
-        <div id="diysidebottom" class="area"></div><!--[/diy]-->
-    </div>
+                <td width="25%"><div class="limit-width">
+                    <a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id=<%= rows[i].id%>"><%= rows[i].shorter_name%><br><%= rows[i].stock_code%></a>
+                </div></td>
+                <td width="30%"><div class="limit-width"><%= rows[i].holder_name%></div></td>
+                <td width="12%"><%= rows[i].start_date%></td>
+                <td width="12%"><%= rows[i].end_date%></td>
+                <td><%= rows[i].dis_date%></td>
+			</tr>
+		<%}%>
+	</textarea>
+
+    <textarea style="display: none;" id="tmplLoading">
+		<li>
+			<div class="dropload-load"><span class="loading"></span>加载中...</div>
+		</li>
+	</textarea>
 </div>
-
 
 <script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
 <script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
-<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
-<script src="static/js/common.js"></script>
-<script src="static/js/calendar.js"></script>
-<script src="static/js/common_extra.js"></script>
-<script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
-<script src="./source/plugin/company_manage/template/js/f_zhiya_list.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/laydate/laydate.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/baidutemplate.js"></script>
+<!--<script src="./source/plugin/company_manage/template/touch/js/f_list.js"></script>-->
+<script src="./source/plugin/company_manage/template/touch/js/dropdown.js"></script>
+<script src="./source/plugin/company_manage/template/touch/js/f_zhiya_list_touch.js"></script>
 
 <!--{subtemplate common/footer}-->

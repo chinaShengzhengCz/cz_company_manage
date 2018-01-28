@@ -1,0 +1,86 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
+<link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
+<style>
+    #residedistrictbox, #showerror_residecity {
+        display: inline;
+    }
+
+    table a {
+        color: #4d89cd;
+    }
+
+    .inline, .inline label {
+        display: inline;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
+        <a href="plugin.php?id=company_manage:company_zhiya_list_front">质押库</a>
+    </div>
+</div>
+
+<style id="diy_style" type="text/css"></style>
+<div id="ct" class="ct2_a wp cl">
+    <div class="mn">
+        <form class="hidden" id="search_form">
+            <input type="hidden" name="finish_alert" value="">
+            <input type="hidden" name="dis_recent" value="">
+            <input type="hidden" name="zhiya_recent" value="">
+            <p>
+                <label class="inline">证券代码 <input class="form-control" name="stock_code"/></label>
+                <label class="inline">公司名称 <input class="form-control" name="company_name"/></label>
+            </p>
+            <p>
+                <label class="inline">股东名称 <input class="form-control" name="holder_name"/></label>
+                <label class="inline"><span  style="width:60px;display:inline-block">质押方</span><input class="form-control" name="zhiya_name"/></label>
+            </p>
+            <p>
+                <label class="inline">质押日期</label>
+                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+            </p>
+            <p>
+                <label class="inline">到期日期</label>
+                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+            </p>
+            <p>
+                <label class="inline">解押日期</label>
+                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+            </p>
+            <input class="btn btn-primary search_button" type="button" value="查询">
+        </form>
+        <table id="company_list"></table>
+    </div>
+
+    <div class="appl">
+        <!--[diy=diysidetop]-->
+        <div id="diysidetop" class="area"></div><!--[/diy]-->
+        <!--{subtemplate company_manage/zhiya_side_left}-->
+        <!--[diy=diysidebottom]-->
+        <div id="diysidebottom" class="area"></div><!--[/diy]-->
+    </div>
+</div>
+
+
+<script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
+<script src="static/js/common.js"></script>
+<script src="static/js/calendar.js"></script>
+<script src="static/js/common_extra.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
+<script src="./source/plugin/company_manage/template/js/f_zhiya_list.js"></script>
+
+<!--{subtemplate common/footer}-->

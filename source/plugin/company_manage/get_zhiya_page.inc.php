@@ -10,25 +10,35 @@ $offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
 $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'start_date';
 $order = !empty($_GET['order']) ? $_GET['order'] : 'desc';
 $add_where = '';
-$field = !empty($_GET['field']) ? $_GET['field'] : 'id,code,stock_code,holder_id,zhiya_code,zhiya_count,zhiya_type,start_date,end_date,dis_date';
+$return = array('rows' => array(), 'total' => 0);
+$field = !empty($_GET['field']) ? $_GET['field'] : 'id,code,stock_code,holder_id,zhiya_code,zhiya_count,zhiya_type,start_date,end_date,dis_date,gap,stock_value';
 if (isset($_GET['finish_alert']) && $_GET['finish_alert']) {
     $today_string = date('Y-m-d');
     $where .= " and (dis_date is NULL or dis_date='0000-00-00') and end_date >='{$today_string}'";
     $sort = 'end_date';
     $order = 'asc';
+    $return['condition_name'] = '质押到期提醒';
 } elseif (isset($_GET['dis_recent']) && $_GET['dis_recent']) {
     $today_string = date('Y-m-d');
     if (is_numeric($_GET['dis_recent'])) {
         $range = 30 * intval($_GET['dis_recent']);
         $where .= " and TIMESTAMPDIFF(DAY,start_date,dis_date) <= {$range}";
+        $return['condition_name'] = $range . '天内解押';
     } else {
+        $return['condition_name'] = '近期解押';
         $where .= " and (dis_date is not NULL and dis_date !='0000-00-00')";
     }
     $sort = 'dis_date';
     $order = 'desc';
+} elseif (isset($_GET['is_gap']) && $_GET['is_gap']) {
+    $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'gap';
+    $order = !empty($_GET['order']) ? $_GET['order'] : 'asc';
+    $where .= " and (dis_date is NULL or dis_date ='0000-00-00' or dis_date ='')";
+    $return['condition_name'] = '差价查询';
 } elseif (isset($_GET['zhiya_recent']) && $_GET['zhiya_recent']) {
     if (is_numeric($_GET['zhiya_recent'])) {
         $range = 30 * intval($_GET['zhiya_recent']);
+        $return['condition_name'] = $range . '内短期质押';
         $where .= " and TIMESTAMPDIFF(DAY,start_date,end_date) <= {$range}";
         $sort = 'start_date';
         $order = 'desc';
@@ -44,7 +54,7 @@ if (isset($_GET['finish_alert']) && $_GET['finish_alert']) {
     }
     if (isset($_GET['company_name']) && $_GET['company_name']) {
         $full_name = trim(iconv('UTF-8', 'GBK', urldecode(urldecode(($_GET['company_name'])))));
-        $companys = C::t('company_manage_base')->fetch_all_by_where('1=1', 'code', " and full_name like '%{$full_name}%' or shorter_name like '%{$full_name}%'");
+        $companys = C::t('company_manage_base')->fetch_all_by_where('1=1', 'code', " and shorter_name like '%{$full_name}%'");
         if (!empty($companys)) {
             $tmp_codes = implode("','", array_filter(array_unique(get_values($companys, 'code'))));
             $add_where .= " and (code in ('{$tmp_codes}') or code like '%{$full_name}%')";
@@ -157,11 +167,11 @@ if (!empty($data)) {
             $data = merge_arr($data, $zhiya_companys, 'zhiya_code');
         }
     }
-    $return['rows'] = gbk2utf8($data);
+    $return['rows'] = $data;
     $return['total'] = $total;
-    print_r(json_encode($return));
+    print_r(json_encode(gbk2utf8($return)));
 } else {
-    print_r(json_encode(array('rows' => array(), 'total' => 0)));
+    print_r(json_encode(gbk2utf8($return)));
 }
 
 ?>

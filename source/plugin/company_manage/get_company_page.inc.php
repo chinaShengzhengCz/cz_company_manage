@@ -24,9 +24,12 @@ if (isset($_GET['fields']) && $_GET['fields'] != '') {
         $fields = '*';
     }
 }
+$return = array('rows' => array(), 'total' => 0);
+
 $add_where = '';
 if (isset($_GET['search_term']) && $_GET['search_term'] != '') {
     $full_name = iconv('UTF-8', 'GBK', urldecode(urldecode(($_GET['search_term']))));
+    $full_name = trim(trim($full_name, "\t"));
     $full_name = str_replace('(', 'ги', $full_name);
     $full_name = str_replace(')', 'ги', $full_name);
     $add_where = " and (full_name like '%{$full_name}%' or shorter_name like '%{$full_name}%' or code like '%{$full_name}%')";
@@ -34,6 +37,7 @@ if (isset($_GET['search_term']) && $_GET['search_term'] != '') {
 
 if (isset($_GET['full_name']) && $_GET['full_name']) {
     $full_name = iconv('UTF-8', 'GBK', urldecode(urldecode(($_GET['full_name']))));
+    $full_name = trim(trim($full_name, "\t"));
     $full_name = str_replace('(', 'ги', $full_name);
     $full_name = str_replace(')', 'ги', $full_name);
     if (strstr($full_name, ' ')) {
@@ -53,6 +57,10 @@ if (isset($_GET['full_name']) && $_GET['full_name']) {
 }
 if (isset($_GET['cate_id']) && $_GET['cate_id']) {
     $add_where .= " and find_in_set('{$_GET['cate_id']}',cate_map)";
+    $search_cate = getCateById($_GET['cate_id']);
+    if ($search_cate) {
+        $return['cateName'] = gbk2utf8($search_cate['name']);
+    }
 //        if (!empty($codes)) {
 //            $code = get_values($codes, 'code');
 //            $code_str = implode("','", array_unique(array_filter($code)));
@@ -69,6 +77,8 @@ if (isset($_GET['area_id']) && $_GET['area_id']) {
     $child_area[] = $_GET['area_id'];
     $search_area = implode(',', array_filter(array_unique($child_area)));
     $where .= " and area_id in ({$search_area})";
+    $t_diqu = getAreaById($_GET['area_id']);
+    $return['areaName'] = gbk2utf8($t_diqu['name']);
 }
 
 if (isset($page_config[$_G['groupid']])) {
@@ -77,6 +87,7 @@ if (isset($page_config[$_G['groupid']])) {
     $data = C::t($tablename)->fetch_page_data($where, $offset, $limit, $fields, '', $add_where, "position desc,id desc");
 }
 if (!empty($data)) {
+
     if (isset($_GET['search_term']) && $_GET['search_term'] != '') {
         foreach ($data as &$m) {
             $m['id'] = $m['code'];
@@ -112,12 +123,13 @@ if (!empty($data)) {
                 $row['area_name'] = '';
             }
         }
+
         $return['rows'] = gbk2utf8($data);
         $return['total'] = $total;
         print_r(json_encode($return));
     }
 } else {
-    print_r(json_encode(array('rows' => array(), 'total' => 0)));
+    print_r(json_encode($return));
 }
 
 ?>

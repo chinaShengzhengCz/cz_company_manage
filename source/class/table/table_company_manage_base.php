@@ -65,7 +65,7 @@ class table_company_manage_base extends discuz_table
                 return array();
             }
             if ($start > $user_limit) {
-                exit('³¬³ö·¶Î§');
+                return array();
             }
             if ($limit > $user_limit) {
                 $limit = $user_limit;

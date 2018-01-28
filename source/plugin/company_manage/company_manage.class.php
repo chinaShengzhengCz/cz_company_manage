@@ -92,6 +92,16 @@ function get_child_area($area_ids, &$child_areas)
     return false;
 }
 
+function getAreaById($area_id)
+{
+    return DB::fetch_first("SELECT id,name FROM %t WHERE id ={$area_id}", array('common_district'));
+}
+
+function getCateById($cate_id)
+{
+    return DB::fetch_first("SELECT cate_id,name FROM %t WHERE cate_id ={$cate_id}", array('company_category'));
+}
+
 function format_area($id, &$areas)
 {
     $area = DB::fetch_first('SELECT * FROM %t WHERE ' . DB::field('id', $id), array('common_district'));

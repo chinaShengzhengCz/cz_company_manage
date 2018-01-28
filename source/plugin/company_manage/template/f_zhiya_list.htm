@@ -35,9 +35,10 @@
             <input type="hidden" name="finish_alert" value="">
             <input type="hidden" name="dis_recent" value="">
             <input type="hidden" name="zhiya_recent" value="">
+            <input type="hidden" name="is_gap" value="">
             <p>
                 <label class="inline">证券代码 <input class="form-control" name="stock_code"/></label>
-                <label class="inline">公司名称 <input class="form-control" name="company_name"/></label>
+                <label class="inline">股票名称 <input class="form-control" name="company_name"/></label>
             </p>
             <p>
                 <label class="inline">股东名称 <input class="form-control" name="holder_name"/></label>
@@ -45,18 +46,18 @@
             </p>
             <p>
                 <label class="inline">质押日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="开始时间">
+                <input onclick="showcalendar(event, this, false)" type="text" name="start_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="结束时间">
             </p>
             <p>
                 <label class="inline">到期日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods"  placeholder="开始时间">
+                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="结束时间">
             </p>
             <p>
                 <label class="inline">解押日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods">
-                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods">
+                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="开始时间">
+                <input onclick="showcalendar(event, this, false)" type="text" name="dis_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="结束时间">
             </p>
             <input class="btn btn-primary search_button" type="button" value="查询">
         </form>

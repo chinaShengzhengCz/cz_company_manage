@@ -13,9 +13,9 @@ table_config.queryParams = function queryParams(params) {  //配置参数
     is_d = getUrlParam('is_recent');
     is_z = getUrlParam('is_zhiya');
     is_r = getUrlParam('dis_recent');
+    is_g = getUrlParam('is_gap');
     is_f_r = getUrlParam('finish_recent');
-
-    if (!jQuery('#search_form [name="dis_recent"]').val() && !jQuery('#search_form [name="finish_alert"]').val() && !jQuery('#search_form [name="zhiya_recent"]').val()) {
+    if (!jQuery('#search_form [name="dis_recent"]').val() && !jQuery('#search_form [name="finish_alert"]').val() && !jQuery('#search_form [name="zhiya_recent"]').val() && !jQuery('#search_form [name="is_gap"]').val()) {
 
         if (is_r) {
             jQuery('#search_form')[0].reset();
@@ -33,9 +33,13 @@ table_config.queryParams = function queryParams(params) {  //配置参数
             jQuery('#search_form')[0].reset();
             jQuery('#search_form').hide();
             jQuery('#search_form [name="zhiya_recent"]').val(is_z);
+        } else if (is_g) {
+            jQuery('#search_form')[0].reset();
+            jQuery('#search_form').hide();
+            jQuery('#search_form [name="is_gap"]').val(is_g);
         }
     } else {
-        params.order = 'desc';
+        // params.order = 'desc';
     }
     jQuery('#search_form').find('input[name]').each(function () {
         params[jQuery(this).attr('name')] = jQuery(this).val();
@@ -69,6 +73,14 @@ jQuery(function () {
         },
         {field: 'holder_name', title: '股东名称'},
         {field: 'zhiya_name', title: '质押方'},
+        {field: 'stock_value', title: '质押日市值'},
+        {
+            field: 'gap', title: '差价', sortable: true, formatter: function (val) {
+            if (val) {
+                return val + '%';
+            }
+        }
+        },
         {field: 'zhiya_count', title: '数量（万股)'},
         {field: 'start_date', title: '质押日期', sortable: true},
         {
@@ -92,7 +104,9 @@ jQuery(function () {
     ];
     table_config.url = "plugin.php?id=company_manage:get_zhiya_page";
     jQuery('#company_list').bootstrapTable(table_config);
+    gap();
     jQuery('.search_button').on('click', function () {
+        gap();
         jQuery('#search_form [type="hidden"]').val('');
         jQuery('#company_list').bootstrapTable('selectPage', 1);
     });
@@ -106,6 +120,7 @@ function finish_alert() {
     jQuery('#search_form [type="hidden"]').val('');
     jQuery('#search_form').hide();
     jQuery('#search_form [name="finish_alert"]').val(1);
+    gap();
     jQuery('#company_list').bootstrapTable('selectPage', 1);
 }
 function dis_recent(month) {
@@ -128,6 +143,7 @@ function dis_recent(month) {
     } else {
         jQuery('#search_form [name="dis_recent"]').val('x');
     }
+    gap();
     jQuery('#company_list').bootstrapTable('selectPage', 1);
 }
 function zhiya_recent(month) {
@@ -150,7 +166,9 @@ function zhiya_recent(month) {
     } else {
         jQuery('#search_form [name="zhiya_recent"]').val('x');
     }
+    gap();
     jQuery('#company_list').bootstrapTable('selectPage', 1);
+    return false;
 }
 function getUrlParam(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -159,7 +177,31 @@ function getUrlParam(name) {
     return null; //返回参数值
 }
 function multi_search() {
+    gap();
     jQuery('#search_form').toggle();
+    return false;
+}
+function gap(gaps) {
+    gaps = gaps || false;
+    if (gaps) {
+        jQuery('#search_form')[0].reset();
+        jQuery('#search_form [type="hidden"]').val('');
+        jQuery('#search_form').hide();
+        jQuery('#search_form [name="is_gap"]').val(1);
+        table_config.sortOrder = 'asc';
+        jQuery('#company_list').bootstrapTable('refreshOptions',table_config);
+        jQuery('#company_list').bootstrapTable('showColumn', 'gap');
+        jQuery('#company_list').bootstrapTable('hideColumn', 'zhiya_name');
+        jQuery('#company_list').bootstrapTable('hideColumn', 'dis_date');
+        jQuery('#company_list').bootstrapTable('showColumn', 'stock_value');
+    } else {
+        jQuery('#search_form [name="is_gap"]').val('');
+        jQuery('#company_list').bootstrapTable('hideColumn', 'stock_value');
+        jQuery('#company_list').bootstrapTable('showColumn', 'zhiya_name');
+        jQuery('#company_list').bootstrapTable('showColumn', 'dis_date');
+        jQuery('#company_list').bootstrapTable('hideColumn', 'gap');
+    }
+    return false;
 }
 if (window.location.href.indexOf('id=company_manage:company_zhiya_list_front&redirect=true&multi_search') != -1) {
     window.name = '';

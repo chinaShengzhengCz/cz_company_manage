@@ -1,8 +1,7 @@
 <!--{template common/header}-->
 
-<!--{if ($oper=='child')||($oper=='holder')}-->
+<!--{if ($oper=='child')||($oper=='holder')||$oper=='contact'||$oper=='thread'}-->
 <link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap/css/bootstrap.css" type="text/css" media="all">
-<link rel="stylesheet" href="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.css" type="text/css" media="all">
 <link rel="stylesheet" href="./source/plugin/company_manage/template/css/company_manage_common.css" type="text/css" media="all">
 <link rel="stylesheet" type="text/css" href="{$_G['setting']['csspath']}{STYLEID}_common.css"/>
 <style>
@@ -32,24 +31,19 @@
     td a {
         color: #4d89cd;
     }
+    th{
+        width:20%;
+    }
+    td, th{
+        padding:10px;
+        border:1px solid #d4d4d4;
+    }
 </style>
-<div id="pt" class="bm cl">
-    <div class="z">
-        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-        <a href="plugin.php?id=company_manage:company_zhiya_list_front">质押库</a>
-    </div>
-</div>
 
 
 <style id="diy_style" type="text/css"></style>
 <div id="ct" class="ct2_a wp cl">
     <div class="mn">
-        <!--don't close the div here-->
-        <ul class="tb cl">
-            <li <!--{if ($oper=='view')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id={$zhiya_data['id']}">基本资料</a></li>
-            <li <!--{if ($oper=='child')}-->class="a"<!--{/if}-->><a href="plugin.php?id=company_manage:company_zhiya_detail&oper=child&zhiya_id={$zhiya_data['id']}">相关质押</a></li>
-        </ul>
-        <!--{if ($oper=='view')}-->
         <table cellspacing="0" cellpadding="0" class="tfm" id="profilelist">
             <tr>
                 <th>股票代码</th>
@@ -108,37 +102,8 @@
                 <td><!--{if !empty($zhiya_data)}-->{$zhiya_data['industry']}<!--{/if}--></td>
             </tr>
         </table>
-        <!--{elseif ($oper=='child')}-->
-        <table id="company_list"></table>
 
-        <!--{/if}-->
-
-    </div>
-
-
-    <div class="appl">
-        <!--[diy=diysidetop]-->
-        <div id="diysidetop" class="area"></div><!--[/diy]-->
-        <!--{subtemplate company_manage/zhiya_side_left}-->
-        <!--[diy=diysidebottom]-->
-        <div id="diysidebottom" class="area"></div><!--[/diy]-->
     </div>
 </div>
-<script src="./source/plugin/company_manage/template/dict/jquery/jquery.min.js"></script>
-<script src="./source/plugin/company_manage/template/dict/bootstrap/js/bootstrap.min.js"></script>
-<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table.min.js"></script>
-<script src="./source/plugin/company_manage/template/dict/bootstrap-table/bootstrap-table-locale-all.js"></script>
-<script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
-<script src="./source/plugin/company_manage/template/js/f_content_common.js"></script>
-<script src="static/js/common.js"></script>
-<script src="static/js/common_extra.js"></script>
-<!--{if ($oper=='view')}-->
-<script src="./source/plugin/company_manage/template/js/f_zhiya_detail.js"></script>
-<!--{elseif ($oper=='child')}-->
-<script src="./source/plugin/company_manage/template/js/f_related_zhiya.js"></script>
-
-<!--{else}-->
-<script src="./source/plugin/company_manage/template/js/f_list.js"></script>
-<!--{/if}-->
 
 <!--{subtemplate common/footer}-->

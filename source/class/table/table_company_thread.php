@@ -54,7 +54,7 @@ class table_company_thread extends discuz_table
                 return array();
             }
             if ($start > $user_limit) {
-                exit('³¬³ö·¶Î§');
+                return array();
             }
             if ($limit > $user_limit) {
                 $limit = $user_limit;
