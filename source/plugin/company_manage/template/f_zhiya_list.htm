@@ -35,6 +35,7 @@
             <input type="hidden" name="finish_alert" value="">
             <input type="hidden" name="dis_recent" value="">
             <input type="hidden" name="zhiya_recent" value="">
+            <input type="hidden" name="bili" value="">
             <input type="hidden" name="is_gap" value="">
             <p>
                 <label class="inline">证券代码 <input class="form-control" name="stock_code"/></label>
@@ -42,7 +43,7 @@
             </p>
             <p>
                 <label class="inline">股东名称 <input class="form-control" name="holder_name"/></label>
-                <label class="inline"><span  style="width:60px;display:inline-block">质押方</span><input class="form-control" name="zhiya_name"/></label>
+                <label class="inline"><span style="width:60px;display:inline-block">质押方</span><input class="form-control" name="zhiya_name"/></label>
             </p>
             <p>
                 <label class="inline">质押日期</label>
@@ -51,7 +52,7 @@
             </p>
             <p>
                 <label class="inline">到期日期</label>
-                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods"  placeholder="开始时间">
+                <input onclick="showcalendar(event, this, false)" type="text" name="end_date_s" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="开始时间">
                 <input onclick="showcalendar(event, this, false)" type="text" name="end_date_e" class="px" autocomplete="off" tabindex="1" fwin="mods" placeholder="结束时间">
             </p>
             <p>
@@ -83,5 +84,6 @@
 <script src="static/js/common_extra.js"></script>
 <script src="./source/plugin/company_manage/template/js/f_table_common.js"></script>
 <script src="./source/plugin/company_manage/template/js/f_zhiya_list.js"></script>
+
 
 <!--{subtemplate common/footer}-->

@@ -319,7 +319,7 @@
 
         <div class="address-condition">
             <div class="btn-group top_botton">
-                <a class="btn js-drop" href="#" data-type="area" id="cateShow">
+                <a class="btn js-drop" href="javascript:void(0)" data-type="area" id="cateShow">
                     预设条件
                     <span class="caret"></span>
                 </a>
@@ -329,11 +329,13 @@
                             <li onclick="formatSearch('','');return false;" class=""><a href="#">全部</a></li>
                             <li onclick="formatSearch('finish_alert',1);return false;" class=""><a href="javascript:void(0)">质押到期提醒</a></li>
                             <li onclick="formatSearch('dis_recent','X');return false;" class=""><a href="javascript:void(0)">近期解押</a></li>
-                            <li onclick="formatSearch('zhiya_recent',1);return false;" class=""><a href="javascript:void(0)">30天内短期质押</a></li>
-                            <li onclick="formatSearch('zhiya_recent',3);return false;" class=""><a href="javascript:void(0)">90天内短期质押</a></li>
-                            <li onclick="formatSearch('dis_recent',1);return false;" class=""><a href="javascript:void(0)">30天内解押</a></li>
-                            <li onclick="formatSearch('dis_recent',3);return false;" class=""><a href="javascript:void(0)">90天内解押</a></li>
-                            <li onclick="formatSearch('is_gap',1);return false;" class=""><a href="javascript:void(0)">差价查询</a></li>
+                            <li onclick="formatSearch('is_gap',1);return false;" class=""><a href="javascript:void(0)">质押补仓预警</a></li>
+                            <li onclick="formatSearch('zhiya_recent',1);return false;" class=""><a href="javascript:void(0)">短期质押-30天内</a></li>
+                            <li onclick="formatSearch('zhiya_recent',3);return false;" class=""><a href="javascript:void(0)">短期质押-90天内</a></li>
+                            <li onclick="formatSearch('dis_recent',1);return false;" class=""><a href="javascript:void(0)">快速解押-30天内</a></li>
+                            <li onclick="formatSearch('dis_recent',3);return false;" class=""><a href="javascript:void(0)">快速解押-90天内</a></li>
+                            <li onclick="formatSearch('bili',1);return false;" class=""><a href="javascript:void(0)">质押比例</a></li>
+                            <li onclick="formatSearch('bili',5);return false;" class=""><a href="javascript:void(0)">质押比例超50%近期到期清单</a></li>
                         </ul>
                         <ul class="flex-1" id="SecondArea"></ul>
                         <ul class="flex-1" id="ThirdArea"></ul>
@@ -341,7 +343,7 @@
                 </div>
             </div>
             <div class="btn-group top_botton">
-                <a class="btn js-drop" href="#" data-type="cate">
+                <a class="btn js-drop" href="javascript:void(0)" data-type="cate">
                     组合查询
                     <span class="caret"></span>
                 </a>
@@ -391,7 +393,7 @@
     <input type="hidden" name="dis_recent" value="" class="single_search">
     <input type="hidden" name="zhiya_recent" value="" class="single_search">
     <input type="hidden" name="is_gap" value="" class="single_search">
-    <input name="order" value="asc"/>
+    <input name="order" value="desc"/>
     <input name="fields" value="*"/>
     <input name="limit" value="20"/>
     <!--end-->
@@ -404,9 +406,9 @@
                     <a href="plugin.php?id=company_manage:company_zhiya_detail&oper=view&zhiya_id=<%= rows[i].id%>"><%= rows[i].shorter_name%><br><%= rows[i].stock_code%></a>
                 </div></td>
                 <td width="30%"><div class="limit-width"><%= rows[i].holder_name%></div></td>
-                <td width="12%"><%= rows[i].start_date%></td>
-                <td width="12%"><%= rows[i].end_date%></td>
-                <td><%= rows[i].dis_date%></td>
+                <td width="12%"><%if (rows[i].start_date!='0000-00-00'){%><%= rows[i].start_date%><%}%></td>
+                <td width="12%"><%if (rows[i].end_date!='0000-00-00'){%><%= rows[i].end_date%><%}%></td>
+                <td><%if (rows[i].dis_date!='0000-00-00'){%><%= rows[i].dis_date%><%}%></td>
 			</tr>
 		<%}%>
 	</textarea>

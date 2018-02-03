@@ -11,11 +11,11 @@ require_once DISCUZ_ROOT . './source/plugin/company_manage_admin/config.php';
 if (!defined('IN_DISCUZ')) {
     exit('Access Denied');
 }
-if (!empty($forbid_config) && in_array($_G['groupid'], $forbid_config)) {
-    showmessage($config_forbit_limit_message ? $config_forbit_limit_message : '½ûÖ¹·ÃÎÊ', $_G['site_url'], array(), array('timeout' => 3, 'return' => 1));
-}
 if (!$_G['uid']) {
     showmessage('not_loggedin', NULL, array(), array('login' => 1));
+}
+if (!empty($forbid_config) && in_array($_G['groupid'], $forbid_config)) {
+    showmessage($config_forbit_limit_message ? $config_forbit_limit_message : '½ûÖ¹·ÃÎÊ', $_G['site_url'], array(), array('timeout' => 3));
 }
 
 class plugin_company_manage

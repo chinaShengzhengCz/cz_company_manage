@@ -60,6 +60,10 @@
                 <td><!--{if !empty($zhiya_data['code_company'])}--><a href="plugin.php?id=company_manage:company_manage_content&oper=view&code={$zhiya_data['code']}" target="_blank">{$zhiya_data['code_company']}</a><!--{/if}--></td>
             </tr>
             <tr>
+                <th>股票整体质押比例</th>
+                <td><!--{if !empty($zhiya_data['zhiyabili'])}-->{$zhiya_data['zhiyabili']}%<!--{/if}--></td>
+            </tr>
+            <tr>
                 <th>股东名称</th>
                 <td><!--{if !empty($zhiya_data['holder_name'])}-->{$zhiya_data['holder_name']}<!--{/if}--></td>
             </tr>
@@ -91,6 +95,7 @@
                 <th>参考价值(万元)</th>
                 <td><!--{if !empty($zhiya_data)}-->{$zhiya_day_value}<!--{/if}--></td>
             </tr>
+
             <tr>
                 <th>差价</th>
                 <td><!--{if !empty($zhiya_data['gap'])}-->{$zhiya_data['gap']}%<!--{/if}--></td>

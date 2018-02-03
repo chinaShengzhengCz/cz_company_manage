@@ -11,7 +11,7 @@ $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'start_date';
 $order = !empty($_GET['order']) ? $_GET['order'] : 'desc';
 $add_where = '';
 $return = array('rows' => array(), 'total' => 0);
-$field = !empty($_GET['field']) ? $_GET['field'] : 'id,code,stock_code,holder_id,zhiya_code,zhiya_count,zhiya_type,start_date,end_date,dis_date,gap,stock_value';
+$field = !empty($_GET['field']) ? $_GET['field'] : 'id,code,stock_code,holder_id,zhiya_code,zhiya_count,zhiya_type,start_date,end_date,dis_date,gap,stock_value,zhiyabili';
 if (isset($_GET['finish_alert']) && $_GET['finish_alert']) {
     $today_string = date('Y-m-d');
     $where .= " and (dis_date is NULL or dis_date='0000-00-00') and end_date >='{$today_string}'";
@@ -23,22 +23,29 @@ if (isset($_GET['finish_alert']) && $_GET['finish_alert']) {
     if (is_numeric($_GET['dis_recent'])) {
         $range = 30 * intval($_GET['dis_recent']);
         $where .= " and TIMESTAMPDIFF(DAY,start_date,dis_date) <= {$range}";
-        $return['condition_name'] = $range . '天内解押';
+        $return['condition_name'] = '快速解押-' . $range . '天内';
     } else {
         $return['condition_name'] = '近期解押';
         $where .= " and (dis_date is not NULL and dis_date !='0000-00-00')";
     }
     $sort = 'dis_date';
     $order = 'desc';
-} elseif (isset($_GET['is_gap']) && $_GET['is_gap']) {
+} elseif (isset($_GET['bili']) && $_GET['bili']) {
+    $today_string = date('Y-m-d');
+    $where .= " and (dis_date is NULL or dis_date='0000-00-00') and end_date >='{$today_string}'";
+    $sort = 'end_date';
+    $order = 'asc';
+    $where .= " and (zhiyabili >={$bill_search_config})";
+    $return['condition_name'] = "比例超{$bill_search_config}到期提醒";
+}elseif (isset($_GET['is_gap']) && $_GET['is_gap']) {
     $sort = !empty($_GET['sort']) ? $_GET['sort'] : 'gap';
     $order = !empty($_GET['order']) ? $_GET['order'] : 'asc';
     $where .= " and (dis_date is NULL or dis_date ='0000-00-00' or dis_date ='')";
-    $return['condition_name'] = '差价查询';
+    $return['condition_name'] = '质押参考市值偏差';
 } elseif (isset($_GET['zhiya_recent']) && $_GET['zhiya_recent']) {
     if (is_numeric($_GET['zhiya_recent'])) {
         $range = 30 * intval($_GET['zhiya_recent']);
-        $return['condition_name'] = $range . '内短期质押';
+        $return['condition_name'] = '短期质押-' . $range . '天内';
         $where .= " and TIMESTAMPDIFF(DAY,start_date,end_date) <= {$range}";
         $sort = 'start_date';
         $order = 'desc';
@@ -99,19 +106,11 @@ if (isset($_GET['finish_alert']) && $_GET['finish_alert']) {
     }
 
 }
-if (isset($page_config[$_G['groupid']])) {
-    $data = C::t($tablename)->fetch_page_data($where, $offset, $limit, $field, $page_config[$_G['groupid']], $add_where, "{$sort} {$order}");
-} else {
-    $data = C::t($tablename)->fetch_page_data($where, $offset, $limit, $field, '', $add_where, "{$sort} {$order}");
-}
+$data = C::t($tablename)->fetch_page_data($where, $offset, $limit, $field, '', $add_where, "{$sort} {$order}");
 if (!empty($data)) {
     $t = C::t($tablename)->count_by_where($where, $add_where);
     if (!empty($t['total'])) {
-        if (!empty($_G['groupid']) && isset($page_config[$_G['groupid']]) && $page_config[$_G['groupid']] < $t['total']) {
-            $total = $page_config[$_G['groupid']];
-        } else {
-            $total = $t['total'];
-        }
+        $total = $t['total'];
     } else {
         $total = 0;
     }
